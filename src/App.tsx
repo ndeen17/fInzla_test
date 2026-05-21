@@ -78,7 +78,7 @@ export default function App() {
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-muted">This month</h2>
                 <span className="font-mono text-[11px] text-muted">{summary.length} categories</span>
               </div>
-              <LimitSummaryList items={summary} loading={loading} />
+              <LimitSummaryList items={summary} loading={loading} limits={limits} onChanged={refresh} />
             </div>
 
             <div>
@@ -86,7 +86,7 @@ export default function App() {
                 <h2 className="text-xs font-semibold uppercase tracking-wider text-muted">Recent activity</h2>
                 <span className="font-mono text-[11px] text-muted">{activities.length} records</span>
               </div>
-              <ActivityList activities={activities} limits={limits} />
+              <ActivityList activities={activities} limits={limits} onChanged={refresh} />
             </div>
           </section>
         </div>
