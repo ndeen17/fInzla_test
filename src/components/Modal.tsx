@@ -32,7 +32,7 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
     <div
       role="presentation"
       onClick={onClose}
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/40 px-4 py-6 backdrop-blur-sm animate-fade-up"
+      className="fixed inset-0 z-[100] flex items-end justify-center bg-ink/40 px-3 py-4 backdrop-blur-sm animate-fade-up sm:items-center sm:px-4 sm:py-6"
     >
       <div
         ref={dialogRef}
@@ -40,7 +40,7 @@ export function Modal({ open, onClose, title, children }: ModalProps) {
         aria-modal="true"
         aria-label={title}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md rounded-3xl border border-hairline bg-white p-5 shadow-card"
+        className="max-h-[90vh] w-full max-w-md overflow-y-auto rounded-3xl border border-hairline bg-white p-4 shadow-card sm:p-5"
       >
         <div className="mb-3 flex items-start justify-between gap-3">
           <h3 className="text-sm font-semibold text-ink">{title}</h3>

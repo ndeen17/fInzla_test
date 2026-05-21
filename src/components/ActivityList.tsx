@@ -35,7 +35,45 @@ export function ActivityList({ activities, limits, onChanged }: Props) {
 
   return (
     <>
-      <div className="overflow-hidden rounded-2xl border border-hairline bg-white shadow-card">
+      {/* Mobile: card list */}
+      <ul className="space-y-2 sm:hidden">
+        {activities.map((a) => (
+          <li key={a.id} className="card">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium text-ink">{a.description}</p>
+                <p className="mt-0.5 text-xs text-muted">
+                  {nameById.get(a.categoryId) ?? '—'}
+                  <span className="mx-1.5 text-hairline">•</span>
+                  <span className="font-mono">{formatDate(a.occurredAt)}</span>
+                </p>
+              </div>
+              <p className="shrink-0 text-sm font-semibold text-ink">{formatNaira(a.amount)}</p>
+            </div>
+            <div className="mt-3 flex items-center justify-end gap-2">
+              <button
+                type="button"
+                aria-label={`Edit activity ${a.description}`}
+                onClick={() => setModal({ kind: 'edit', item: a })}
+                className="rounded-pill border border-hairline px-3 py-1.5 text-xs font-medium text-ink hover:bg-chip"
+              >
+                Edit
+              </button>
+              <button
+                type="button"
+                aria-label={`Delete activity ${a.description}`}
+                onClick={() => setModal({ kind: 'delete', item: a })}
+                className="rounded-pill border border-rose-200 px-3 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-50"
+              >
+                Delete
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      {/* sm+ : table */}
+      <div className="hidden overflow-x-auto rounded-2xl border border-hairline bg-white shadow-card sm:block">
         <table className="w-full text-sm">
           <thead className="bg-chip/60 text-[11px] uppercase tracking-wide text-muted">
             <tr>
@@ -49,17 +87,17 @@ export function ActivityList({ activities, limits, onChanged }: Props) {
           <tbody className="divide-y divide-hairline">
             {activities.map((a) => (
               <tr key={a.id}>
-                <td className="px-3 py-2 font-mono text-xs text-muted">{formatDate(a.occurredAt)}</td>
+                <td className="whitespace-nowrap px-3 py-2 font-mono text-xs text-muted">{formatDate(a.occurredAt)}</td>
                 <td className="px-3 py-2 text-ink">{nameById.get(a.categoryId) ?? '—'}</td>
                 <td className="px-3 py-2 text-ink">{a.description}</td>
-                <td className="px-3 py-2 text-right font-medium text-ink">{formatNaira(a.amount)}</td>
+                <td className="whitespace-nowrap px-3 py-2 text-right font-medium text-ink">{formatNaira(a.amount)}</td>
                 <td className="px-3 py-2 text-right">
                   <div className="inline-flex items-center gap-1">
                     <button
                       type="button"
                       aria-label={`Edit activity ${a.description}`}
                       onClick={() => setModal({ kind: 'edit', item: a })}
-                      className="rounded-pill border border-hairline px-2 py-1 text-[11px] font-medium text-ink hover:bg-chip"
+                      className="rounded-pill border border-hairline px-2.5 py-1 text-[11px] font-medium text-ink hover:bg-chip"
                     >
                       Edit
                     </button>
@@ -67,7 +105,7 @@ export function ActivityList({ activities, limits, onChanged }: Props) {
                       type="button"
                       aria-label={`Delete activity ${a.description}`}
                       onClick={() => setModal({ kind: 'delete', item: a })}
-                      className="rounded-pill border border-rose-200 px-2 py-1 text-[11px] font-medium text-rose-700 hover:bg-rose-50"
+                      className="rounded-pill border border-rose-200 px-2.5 py-1 text-[11px] font-medium text-rose-700 hover:bg-rose-50"
                     >
                       Delete
                     </button>

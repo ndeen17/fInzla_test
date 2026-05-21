@@ -43,21 +43,23 @@ export function LimitSummaryList({ items, loading, onChanged }: Props) {
           const width = Math.min(100, s.percentage);
           return (
             <div key={s.categoryId} className="card animate-fade-up">
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <h3 className="text-sm font-semibold text-ink">{s.name}</h3>
-                  <p className="mt-0.5 text-xs text-muted">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h3 className="truncate text-sm font-semibold text-ink">{s.name}</h3>
+                    <StatusBadge status={s.status} />
+                  </div>
+                  <p className="mt-1 text-xs text-muted">
                     {formatNaira(s.usage)} of {formatNaira(s.limitAmount)}
                     <span className="ml-1.5 font-mono text-[11px] text-muted">({s.percentage.toFixed(1)}%)</span>
                   </p>
                 </div>
-                <div className="flex flex-wrap items-center justify-end gap-2">
-                  <StatusBadge status={s.status} />
+                <div className="flex items-center justify-end gap-2">
                   <button
                     type="button"
                     aria-label={`Edit ${s.name}`}
                     onClick={() => setModal({ kind: 'edit', item: s })}
-                    className="rounded-pill border border-hairline px-2 py-1 text-[11px] font-medium text-ink hover:bg-chip"
+                    className="rounded-pill border border-hairline px-3 py-1.5 text-xs font-medium text-ink hover:bg-chip"
                   >
                     Edit
                   </button>
@@ -65,7 +67,7 @@ export function LimitSummaryList({ items, loading, onChanged }: Props) {
                     type="button"
                     aria-label={`Delete ${s.name}`}
                     onClick={() => setModal({ kind: 'delete', item: s })}
-                    className="rounded-pill border border-rose-200 px-2 py-1 text-[11px] font-medium text-rose-700 hover:bg-rose-50"
+                    className="rounded-pill border border-rose-200 px-3 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-50"
                   >
                     Delete
                   </button>

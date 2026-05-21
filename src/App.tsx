@@ -48,9 +48,9 @@ export default function App() {
         </nav>
       </header>
 
-      <main className="container-x py-10">
-        <section className="mb-8 animate-fade-up">
-          <h1 className="text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+      <main className="container-x py-6 sm:py-10">
+        <section className="mb-6 animate-fade-up sm:mb-8">
+          <h1 className="text-2xl font-semibold tracking-tight text-ink sm:text-4xl">
             Track monthly spend against category limits.
           </h1>
           <p className="mt-2 max-w-xl text-sm text-muted">
@@ -92,7 +92,7 @@ export default function App() {
         </div>
 
         <footer className="mt-12 border-t border-hairline pt-6 text-xs text-muted">
-          API: <code className="font-mono">{import.meta.env.VITE_API_URL ?? 'http://localhost:4000'}</code>
+          API: <code className="break-all font-mono">{import.meta.env.VITE_API_URL ?? 'http://localhost:4000'}</code>
         </footer>
       </main>
     </div>
